@@ -2,3 +2,4 @@
 .color_coded
 tags
 build/*
+.sconsign.dblite

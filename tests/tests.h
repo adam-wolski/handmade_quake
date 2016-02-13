@@ -4,5 +4,6 @@
 #include "./minunit/minunit.h"
 #pragma clang diagnostic pop
 
+#include "../src/quakedef.h"
+
 int test_mstring();
-int test_common();

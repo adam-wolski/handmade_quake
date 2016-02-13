@@ -1,5 +1,5 @@
 #include "./minunit/minunit.h"
-#include "../mstring.h"
+#include "../src/mstring.h"
 
 MU_TEST(test_create) {
         Mstring test = mstr_from_cstr("TEST");
