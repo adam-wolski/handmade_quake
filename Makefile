@@ -1,5 +1,5 @@
 P=quake
-TARGET=quake
+TARGET=build/quake
 SOURCES=$(wildcard *.c)
 TEST_SRC=$(wildcard tests/*_tests.c)
 TESTS=$(patsubst %.c,%,$(TEST_SRC))
