@@ -1,18 +1,47 @@
+/*
+ * Like in original Quake this one header is included everywhere so don't define anything in here,
+ * unless you want redefinition errors.
+ */
+
+/* System headers */
 #include <stdint.h>
 #include <stddef.h>
-#include <stdbool.h>
+#include <stdbool.h> /* For false and true boolean */
 #include <stdlib.h>
 #include <stdio.h>
 
+/* X11 */
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include <X11/Xos.h>
 
-
+/* Local headers */
+#include "debug.h"
 #include "mstring.h"
 #include "common.h"
 #include "vid_lin.h"
+#include "sys_lin.h"
+#include "host.h"
+
+/*
+##############################################################################################
+                                Basic type typedefs.
+##############################################################################################
+*/
 
 typedef uint8_t uint8;
 typedef uint32_t uint32;
 typedef int32_t int32;
+/* TODO Make stdfloat version of stdint with checks for availible precision on system */
+typedef float f32;
+typedef double f64;
+
+/*
+##############################################################################################
+                                Global game variables.
+##############################################################################################
+*/
+
+/* Those sit in host.c */
+extern bool IS_RUNNING;
+extern f64 TARGET_FPS;
