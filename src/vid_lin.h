@@ -3,7 +3,7 @@
 
 void vid_init();
 void vid_close();
-void capture_events_test();
+void vid_redraw();
 
 extern Display *dis;
 extern int screen;

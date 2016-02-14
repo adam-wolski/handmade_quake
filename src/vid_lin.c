@@ -1,3 +1,8 @@
+/* 
+ * Most of the X11 code is based or even basicly copied from A Brief intro to X11 Programming.
+ * http://math.msu.su/~vvb/2course/Borisenko/CppProjects/GWindow/xintro.html
+ * So thanks to bhammond@blaze.cba.uga.edu
+ */
 #include "quakedef.h"
 
 _Xconst char* WINDOW_TITLE = "Quake";
@@ -8,8 +13,6 @@ Display *dis;
 int screen;
 Window win;
 GC gc;
-
-void redraw();
 
 void vid_init() {
 	/* get the colors black and white */
@@ -65,40 +68,6 @@ void vid_close() {
         exit(0);
 }
 
-void capture_events_test() {
-        XEvent event;		/* the XEvent declaration !!! */
-	KeySym key;		/* a dealie-bob to handle KeyPress Events */	
-	char text[255];		/* a char buffer for KeyPress Events */
-
-	/* look for events forever... */
-	while(1) {		
-		/* get the next event and stuff it into our event variable.
-		   Note:  only events we set the mask for are detected!
-		*/
-		XNextEvent(dis, &event);
-	
-		if (event.type==Expose && event.xexpose.count==0) {
-		/* the window was exposed redraw it! */
-			redraw();
-		}
-		if (event.type==KeyPress&&
-		    XLookupString(&event.xkey,text,255,&key,0)==1) {
-		/* use the XLookupString routine to convert the invent
-		   KeyPress data into regular text.  Weird but necessary...
-		*/
-			if (text[0]=='q') {
-				vid_close();
-			}
-			printf("You pressed the %c key!\n",text[0]);
-		}
-		if (event.type==ButtonPress) {
-		/* tell where the mouse Button was Pressed */
-			printf("You pressed a button at (%i,%i)\n",
-				event.xbutton.x,event.xbutton.y);
-		}
-	}
-}
-
-void redraw() {
+void vid_redraw() {
 	XClearWindow(dis, win);
 }
