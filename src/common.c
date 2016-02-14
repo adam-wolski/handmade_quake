@@ -5,6 +5,13 @@ Mstring com_cmdline;
 Mstring* com_argv;
 size_t  com_argc;
 
+/*
+===============================================================================================
+        Function: com_init_argv
+        Initialize game arguments.
+        Returns False on memory error.
+===============================================================================================
+*/
 bool com_init_argv(const uint32 argc, char** argv) {
        size_t n = 0;
        size_t i = 0;
@@ -24,9 +31,8 @@ bool com_init_argv(const uint32 argc, char** argv) {
        cmdline[n] = 0;
        com_cmdline = mstr_from_cstr(cmdline);
 
-       if (!(com_argv = calloc(MAX_NUM_ARGVS, sizeof(Mstring)))) {
-               return false;
-       }
+       com_argv = calloc(MAX_NUM_ARGVS, sizeof(Mstring));
+       check_mem(com_argv);
 
        com_argc = (size_t)argc;
        for (size_t k = 0; k < com_argc; ++k) {
@@ -34,9 +40,18 @@ bool com_init_argv(const uint32 argc, char** argv) {
        }
 
        return true;
+
+error:
+       return false;
 }
 
-bool com_clean_argv() {
+/*
+===============================================================================================
+        Function: com_clear_argv
+        Clear all the stored arguments, and free memory.
+===============================================================================================
+*/
+bool com_clear_argv() {
         mstr_destroy(com_cmdline);
         for (size_t i = 0; i < com_argc; ++i) {
                 mstr_destroy(com_argv[i]);
@@ -44,6 +59,13 @@ bool com_clean_argv() {
         return true;
 }
 
+
+/*
+===============================================================================================
+        Function: com_check_parm
+        Return True if parameter 'parm' was found in game arguments.
+===============================================================================================
+*/
 bool com_check_parm(const Mstring parm) {
         for (size_t i = 1; i < com_argc; ++i) {
                 if (!mstr_cmp(com_argv[i], parm)) {
@@ -53,6 +75,12 @@ bool com_check_parm(const Mstring parm) {
         return false;
 }
 
+/*
+===============================================================================================
+        Function: com_atoi
+        Convert string to integer value.
+===============================================================================================
+*/
 int32 com_atoi(const Mstring str) {
         unsigned char* data = mstr_to_chars(str);
         size_t len = str->slen;
