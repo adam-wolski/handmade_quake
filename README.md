@@ -9,7 +9,7 @@ Only dependency is X11... i think.
 
 Scons is used for building (Can't be bothered with makefiles anymore)
 So for simple build just use:
-'''
+```
 scons
-'''
+```
 In base directory.
