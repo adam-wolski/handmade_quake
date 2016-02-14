@@ -1,6 +1,6 @@
 #include "tests.h"
 
-int main(int argc, char *argv[])
+int main()
 {
         test_mstring();
         return 0;
