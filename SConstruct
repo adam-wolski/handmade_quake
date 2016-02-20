@@ -54,4 +54,4 @@ LP = ['/usr/lib', '/usr/local/lib']
 
 # --- Building
 ENV.Program('build/quake', SOURCES, LIBS=L, LIBPATH=LP)
-ENV.Program('build/tests/test', TESTS_SOURCES, LIBS=L, LIBSPATH=LP)
+ENV.Program('build/tests/test', TESTS_SOURCES, LIBS=L, LIBPATH=LP)
