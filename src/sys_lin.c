@@ -7,9 +7,12 @@
  * ################################################################################################
  */
 
-/* 
- * Returns elapsed time in seconds since first call of this funtion.
- */
+/*
+===============================================================================================
+        Function: sys_get_time
+        Returns elapsed time in seconds since first call of this funtion.
+===============================================================================================
+*/
 f64 sys_get_time()
 {
         struct timeval tp;  
