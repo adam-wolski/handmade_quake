@@ -3,7 +3,7 @@ import os
 # Setup scons enviroment
 ENV = Environment(CC='clang',
                   CCFLAGS=['-g',
-                           '-std=c11',
+                           '-std=gnu11',
                            '-Wall',
                            '-Wextra',
                            '-Wpedantic',
