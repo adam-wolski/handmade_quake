@@ -7,9 +7,7 @@ void _mstr_free(Mstring str) {
         free(str);
 }
 
-/*
- * Creates Mstring from given C style string 'cstr'
- */
+/** Creates Mstring from given C style string 'cstr' **/
 Mstring mstr_from_cstr(const char* cstr) {
         if (cstr == NULL) return NULL; 
         size_t cstrlen = strlen(cstr);
@@ -35,19 +33,19 @@ unsigned char* mstr_to_chars(Mstring str) {
         return str->data;
 }
 
-/*
+/**
  * Standard C style compare function.
  * Returns:
  *  0 if string are the same,
  * -1 if str1 is smaller
  *  1 if str1 is larger.
- */
+ **/
 int32_t mstr_cmp(Mstring str1, Mstring str2) {
         if (str1 == NULL 
          || str2 == NULL 
          || str1->data == NULL 
          || str2->data == NULL) {
-                // Error
+                /* Error */
                 return -1;
         }
         if (str1->slen == 0 && str2->slen == 0) {
@@ -62,6 +60,7 @@ int32_t mstr_cmp(Mstring str1, Mstring str2) {
         return 0;
 }
 
+/** Shorter compare function which just checks if two string are indentical **/
 bool mstr_compare(Mstring str1, Mstring str2) {
         return mstr_cmp(str1, str2) == 0 ? true : false;
 }
