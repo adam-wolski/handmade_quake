@@ -26,9 +26,9 @@
 /**---------------------------------------------------------------------------------------
         Basic type typedef */
 
-typedef uint8_t uint8;
-typedef uint32_t uint32;
-typedef int32_t int32;
+typedef uint8_t u8;
+typedef uint32_t u32;
+typedef int32_t i32;
 /* TODO Make stdfloat version of stdint with checks for availible precision on system */
 typedef float f32;
 typedef double f64;
