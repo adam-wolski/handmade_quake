@@ -10,18 +10,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-/* X11 */
-#include <X11/Xlib.h>
-#include <X11/Xutil.h>
-#include <X11/Xos.h>
-
 /* Local headers */
 #include "debug.h"
 #include "mstring.h"
 #include "common.h"
-#include "vid_lin.h"
-#include "sys_lin.h"
+#include "sys.h"
 #include "host.h"
+#include "vid.h"
 
 /**---------------------------------------------------------------------------------------
         Basic type typedef */
@@ -33,7 +28,7 @@ typedef int32_t i32;
 typedef float f32;
 typedef double f64;
 
-/*
+
 /**---------------------------------------------------------------------------------------
         Global game variables */
 
