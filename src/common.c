@@ -1,9 +1,9 @@
 #include "quakedef.h"
 
 #define CMD_LINE_LENGTH 256
-Mstring com_cmdline;
-Mstring* com_argv;
-size_t  com_argc;
+MString COM_CMDLINE;
+MString* COM_ARGV;
+size_t  COM_ARGC;
 
 
 /** Initialize game arguments. Returns False on memory error. **/
@@ -25,14 +25,14 @@ bool com_init_argv(const u32 argc, char** argv)
        }
 
        cmdline[n] = 0;
-       com_cmdline = mstr_from_cstr(cmdline);
+       COM_CMDLINE = mstr_from_cstr(cmdline);
 
-       com_argv = calloc(MAX_NUM_ARGVS, sizeof(Mstring));
-       check_mem(com_argv);
+       COM_ARGV = calloc(MAX_NUM_ARGVS, sizeof(MString));
+       check_mem(COM_ARGV);
 
-       com_argc = (size_t)argc;
-       for (size_t k = 0; k < com_argc; ++k) {
-                com_argv[k] = mstr_from_cstr(argv[k]);
+       COM_ARGC = (size_t)argc;
+       for (size_t k = 0; k < COM_ARGC; ++k) {
+                COM_ARGV[k] = mstr_from_cstr(argv[k]);
        }
 
        return true;
@@ -44,18 +44,19 @@ error:
 /** Clear all the stored arguments, and free memory. **/
 bool com_clear_argv() 
 {
-        mstr_destroy(com_cmdline);
-        for (size_t i = 0; i < com_argc; ++i) {
-                mstr_destroy(com_argv[i]);
+        mstr_destroy(COM_CMDLINE);
+        for (size_t i = 0; i < COM_ARGC; ++i) {
+                mstr_destroy(COM_ARGV[i]);
         }
+        free(COM_ARGV);
         return true;
 }
 
 /** Return True if parameter 'parm' was found in game arguments. **/
-bool com_check_parm(const Mstring parm) 
+bool com_check_parm(const MString parm) 
 {
-        for (size_t i = 1; i < com_argc; ++i) {
-                if (!mstr_cmp(com_argv[i], parm)) {
+        for (size_t i = 1; i < COM_ARGC; ++i) {
+                if (!mstr_cmp(COM_ARGV[i], parm)) {
                         return true;
                 }
         }
@@ -63,7 +64,7 @@ bool com_check_parm(const Mstring parm)
 }
 
 /** Convert string to integer value. **/
-i32 com_atoi(const Mstring str) 
+i32 com_atoi(const MString str) 
 {
         unsigned char* data = mstr_to_chars(str);
         size_t len = str->slen;
