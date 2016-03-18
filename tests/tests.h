@@ -6,4 +6,6 @@
 
 #include "../src/quakedef.h"
 
-int test_mstring();
+int mstring_tests();
+int common_tests();
+int sys_tests();

@@ -2,6 +2,8 @@
 
 int main()
 {
-        test_mstring();
+        mstring_tests();
+        common_tests();
+        sys_tests();
         return 0;
 }
