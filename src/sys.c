@@ -25,7 +25,7 @@ SYS_RESULT sys_capture_events()
 static FILE* SYS_HANDLES[MAX_HANDLES] = {0};
 
 
-/** If possible assign an empty file handle to 'h'. **/
+/** If possible assign an empty file handle to 'id'. **/
 static SYS_RESULT find_handle(FileHandleID* id)
 {
         for (size_t i = 0; i < MAX_HANDLES; ++i) {
@@ -64,7 +64,7 @@ static size_t file_end(FILE* f)
 
 /** 
  * Open and setup the file from the path 'path' in the mode 'mode'.
- * Fills file handle 'h' if possible otherwise returns SYS_ERR.
+ * Fills file handle 'id' if possible otherwise returns SYS_ERR.
  * FilePos 'end' is filled with amount of bytes from beggining to end of the file.
  **/
 static SYS_RESULT file_open(MString path, const char* mode, FileHandleID* id, size_t* size)
