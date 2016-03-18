@@ -2,16 +2,16 @@
 #include <string.h>
 #include <stdlib.h>
 
-void _mstr_free(Mstring str) {
+void _mstr_free(MString str) {
         free(str->data);
         free(str);
 }
 
-/** Creates Mstring from given C style string 'cstr' **/
-Mstring mstr_from_cstr(const char* cstr) {
+/** Creates MString from given C style string 'cstr' **/
+MString mstr_from_cstr(const char* cstr) {
         if (cstr == NULL) return NULL; 
         size_t cstrlen = strlen(cstr);
-        Mstring str = calloc(1, sizeof(struct mstring));
+        MString str = calloc(1, sizeof(struct mstring));
         if (str == NULL) return NULL;
         str->slen = cstrlen;
         str->mlen = cstrlen + 1;
@@ -24,12 +24,12 @@ Mstring mstr_from_cstr(const char* cstr) {
         return str;
 }
 
-MSTR_RESULT mstr_destroy(Mstring str) {
+MSTR_RESULT mstr_destroy(MString str) {
         _mstr_free(str);
         return MSTR_OK;
 }
 
-unsigned char* mstr_to_chars(Mstring str) {
+unsigned char* mstr_to_chars(MString str) {
         return str->data;
 }
 
@@ -40,7 +40,7 @@ unsigned char* mstr_to_chars(Mstring str) {
  * -1 if str1 is smaller
  *  1 if str1 is larger.
  **/
-int32_t mstr_cmp(Mstring str1, Mstring str2) {
+int32_t mstr_cmp(MString str1, MString str2) {
         if (str1 == NULL 
          || str2 == NULL 
          || str1->data == NULL 
@@ -61,6 +61,6 @@ int32_t mstr_cmp(Mstring str1, Mstring str2) {
 }
 
 /** Shorter compare function which just checks if two string are indentical **/
-bool mstr_compare(Mstring str1, Mstring str2) {
+bool mstr_compare(MString str1, MString str2) {
         return mstr_cmp(str1, str2) == 0 ? true : false;
 }
