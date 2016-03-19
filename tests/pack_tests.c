@@ -12,6 +12,8 @@ MU_TEST(test_pack_load) {
                   "Wrong packname.");
         mu_assert(strcmp(pack->pack_files[0].filename, "sound/items/r_item1.wav") == 0,
                   "Wrong first file.");
+        mu_assert(strcmp(pack->pack_files[338].filename, "maps/e1m8.bsp") == 0,
+                  "Wrong last file.");
 
         free(pack);
         mstr_destroy(path);
