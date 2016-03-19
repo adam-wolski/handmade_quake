@@ -9,3 +9,4 @@
 int mstring_tests();
 int common_tests();
 int sys_tests();
+int pack_tests();
