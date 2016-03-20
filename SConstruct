@@ -10,7 +10,7 @@ ENV = Environment(CC='clang',
                            '-Wshadow',
                            '-Wstrict-overflow',
                            '-fno-strict-aliasing',
-                           '-O2'
+                           #'-O2'
                           ])
 
 # Set the include paths
