@@ -3,7 +3,7 @@
 int main(int argc, char* argv[])
 {
         /* Initialize game arguments and host */
-        com_init_argv(argc, argv);
+        com_arg_init(argc, argv);
         host_init();
 
         /* Main game loop */
@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
 
         /* End what you started */
         host_close();
-        com_clear_argv();
+        com_arg_clear();
 
         return 0;
 }

@@ -6,17 +6,17 @@ MU_TEST(test_args) {
         argv[0] = "Test string 1";
         argv[1] = "avocado";
         argv[2] = "bananas";
-        com_init_argv(3, argv);
+        com_arg_init(3, argv);
 
         MString t = mstr_from_cstr("bananas");
-        mu_assert(com_check_parm(t), "Wrong return value on test");
+        mu_assert(com_arg_check(t), "Wrong return value on test");
 
         MString t2 = mstr_from_cstr("Not Existing String");
-        mu_assert(com_check_parm(t2) == false, "Wrong return value on test");
+        mu_assert(com_arg_check(t2) == false, "Wrong return value on test");
 
         mstr_destroy(t);
         mstr_destroy(t2);
-        com_clear_argv();
+        com_arg_clear();
 }
 
 MU_TEST(test_atoi) {
