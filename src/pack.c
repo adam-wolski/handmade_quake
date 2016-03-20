@@ -13,11 +13,11 @@ Pack* pack_load(MString path)
         FileHandleID pack_handle; 
         size_t pack_size;
 
-        check(sys_file_open_read(path, &pack_handle, &pack_size) == SYS_OK,
+        check(sys_file_open_read(path, &pack_handle, &pack_size),
               "Failed to open pack file");
 
         PackHeaderDisk pack_header;
-        check(sys_file_read(pack_handle, &pack_header, sizeof(PackHeaderDisk)) == SYS_OK, 
+        check(sys_file_read(pack_handle, &pack_header, sizeof(PackHeaderDisk)), 
               "Failed to read a header from disk.");
 
         check(pack_header.magic[0] == 'P' &&
@@ -30,11 +30,11 @@ Pack* pack_load(MString path)
 
         pack_files = calloc(pack_num_files, sizeof(PackFile));
 
-        check(sys_file_seek(pack_handle, pack_header.dir_offset) == SYS_OK,
+        check(sys_file_seek(pack_handle, pack_header.dir_offset),
               "Failed to seek to the directory offset.");
 
         PackFileDisk disk_files[PACK_MAX_FILES];
-        check(sys_file_read(pack_handle, &disk_files, pack_header.dir_len) == SYS_OK,
+        check(sys_file_read(pack_handle, &disk_files, pack_header.dir_len),
               "Failed to read files from pack file.");
 
         for (int i = 0; i < pack_num_files; ++i) {
@@ -44,7 +44,12 @@ Pack* pack_load(MString path)
         }
 
         pack = calloc(1, sizeof(Pack));
-        memcpy(pack->packname, path->data, PACK_NAME_LEN);
+
+        if (path->mlen > PACK_NAME_LEN) {
+                memcpy(pack->packname, path->data, PACK_NAME_LEN);
+        } else {
+                memcpy(pack->packname, path->data, path->mlen);
+        }
         pack->packname[PACK_NAME_LEN - 1] = '\0';
 
         pack->file_id = pack_handle;
@@ -56,4 +61,12 @@ error:
         if (pack_files) free(pack_files);
         if (pack) free(pack);
         return NULL;
+}
+
+/** Free all the memory allocated for 'pack' **/
+void pack_destroy(Pack* pack)
+{
+        free(pack->pack_files);
+        sys_file_close(pack->file_id);
+        free(pack);
 }

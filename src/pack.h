@@ -10,7 +10,7 @@
  * this one is different then one stored on disk. Original Quake: 64; defined as MAX_QPATH.
  */
 #define PACK_MEM_FILENAME_LEN PACK_DISK_FILENAME_LEN
-/* Maximum amount of characters in PACK file name. Original Quake: 128; defines as MAX_OSPATH */
+/* Maximum amount of characters in PACK file name. Original Quake: 128; defined as MAX_OSPATH */
 #define PACK_NAME_LEN 128
 
 
@@ -48,3 +48,4 @@ typedef struct {
 
 
 Pack* pack_load(MString path);
+void pack_destroy(Pack* pack);

@@ -15,7 +15,7 @@ MU_TEST(test_pack_load) {
         mu_assert(strcmp(pack->pack_files[338].filename, "maps/e1m8.bsp") == 0,
                   "Wrong last file.");
 
-        free(pack);
+        pack_destroy(pack);
         mstr_destroy(path);
 }
 
