@@ -17,6 +17,8 @@
 #include "sys.h"
 #include "host.h"
 #include "vid.h"
+#include "qresult.h"
+
 
 /**---------------------------------------------------------------------------------------
         Basic type typedef */
