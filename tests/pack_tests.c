@@ -1,7 +1,7 @@
 #include "../src/pack.h"
 #include "./minunit/minunit.h"
 
-const char* pak_path = "./content/Id1/PAK0.PAK";
+const char* pak_path = "./content/id1/pak0.pak";
 
 MU_TEST(test_pack_load) {
         MString path = mstr_from_cstr(pak_path);
