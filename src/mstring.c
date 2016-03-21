@@ -1,6 +1,8 @@
 #include "mstring.h"
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <stdarg.h>
 
 void _mstr_free(MString str) {
         free(str->data);
@@ -24,13 +26,44 @@ MString mstr_from_cstr(const char* cstr) {
         return str;
 }
 
-MSTR_RESULT mstr_destroy(MString str) {
+void mstr_destroy(MString str) {
         _mstr_free(str);
-        return MSTR_OK;
 }
 
 unsigned char* mstr_to_chars(MString str) {
         return str->data;
+}
+
+
+/** Create MString from formated string **/
+MString mstr_from_format(const char* fmt, ...)
+{
+        if (fmt == NULL) return NULL;
+
+        /* Create small buffer and try calling vsnprintf which output will tell us the size 
+         * needed for our output string */
+        char* tmpstr = calloc(2, sizeof(char));
+        if (!tmpstr) return NULL;
+        va_list arglist;
+        va_start(arglist, fmt); 
+        int32_t r = vsnprintf(tmpstr, 2, fmt, arglist);
+        va_end(arglist);
+        if (r == -1) return NULL;
+        free(tmpstr);
+
+        /* vsnprintf gave us in return amount of space that was needed to fit whole string.
+         * (excluding null character) */
+        r += 1; /* Add that null character */
+        char* str = calloc(r, sizeof(char));
+        if (!str) return NULL;
+        va_start(arglist, fmt); 
+        r = vsnprintf(str, r, fmt, arglist);
+        va_end(arglist);
+        if (r == -1) return NULL;
+
+        MString mstr =  mstr_from_cstr(str); 
+        free(str);
+        return mstr;
 }
 
 /**
