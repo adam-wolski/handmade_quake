@@ -19,6 +19,26 @@ MU_TEST(test_args) {
         com_arg_clear();
 }
 
+MU_TEST(test_files) {
+        mu_assert(com_file_init(), "Failed to initialize file system");
+        u8* file = NULL;
+        size_t file_size;
+        MString file_name = mstr_from_cstr("sound/items/r_item1.wav");
+        file = com_file_find(file_name, &file_size);
+        mu_assert(file, "Failed to find a file.");
+
+        mstr_destroy(file_name);
+        free(file);
+
+        file_name = mstr_from_cstr("maps/e1m8.bsp");
+        file = com_file_find(file_name, &file_size);
+        mu_assert(file, "Failed to find a file.");
+
+        com_file_clear();
+        free(file);
+        mstr_destroy(file_name);
+}
+
 MU_TEST(test_atoi) {
         MString t1 = mstr_from_cstr("1"); 
         mu_assert(com_atoi(t1) == 1, "Wrong number");
@@ -43,6 +63,7 @@ MU_TEST(test_atoi) {
 
 MU_TEST_SUITE(test_suite) {
         MU_RUN_TEST(test_args);
+        MU_RUN_TEST(test_files);
         MU_RUN_TEST(test_atoi);
 }
 

@@ -13,7 +13,7 @@ bool com_arg_check(const MString parm);
 
 
 /* File management */
-u8* com_file_find(MString file_name, i32* file_len);
+u8* com_file_find(MString file_name, size_t* file_size);
 QResult com_file_init();
 void com_file_clear();
 
