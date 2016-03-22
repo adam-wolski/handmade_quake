@@ -17,6 +17,7 @@ f64 OLD_REALTIME = 0; /* Last frame check */
 void host_init() 
 {
         IS_RUNNING = true;
+        com_file_init();
         vid_init();
 }
 
@@ -48,6 +49,7 @@ bool host_filter_time(f64 time)
 void host_frame(f64 time) 
 {
         host_filter_time(time);
+        vid_update();
 }
 
 /** Close subsystems and clear memory. **/
@@ -55,4 +57,5 @@ void host_close()
 {
         IS_RUNNING = false;
         vid_close();
+        com_file_clear();
 }
