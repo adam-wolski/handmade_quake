@@ -2,8 +2,8 @@
 #include "./minunit/minunit.h"
 #include <unistd.h>
 
-static const char* test_read_path = "./tests/test_data.txt";
-static const char* test_write_path = "./tests/test_data_w.txt";
+static const char* test_read_path = "./tests/test_content/test_data.txt";
+static const char* test_write_path = "./tests/test_content/test_data_w.txt";
 
 MU_TEST(test_file_read_write) {
         MString rpath = mstr_from_cstr(test_read_path);
