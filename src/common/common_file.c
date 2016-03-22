@@ -55,19 +55,19 @@ static void clear_searchpath()
  * Search for file with name 'file_name' in loaded .pak files.
  * If found pointer to file data will be returned  and 'file_size' will hold amount of bytes that
  * this file has.
- * Otherwise NULL is returned and file_size is made 0.
+ * Otherwise NULL is returned and file_size is made 0 (if non NULL).
  **/
 u8* com_file_find(MString file_name, size_t* file_size)
 {
         u8* file = NULL;
-        check_mem(file_size);
         SearchPath* walker;
+        log_info("Looking for file: %s", mstr_to_chars(file_name));
         for (walker = SEARCH_PATH; walker != NULL; walker = walker->next)
         {
                 Pack* pack = walker->pack;
                 for (size_t i = 0; i < pack->num_files; ++i) {
                         if (strcmp((const char*)mstr_to_chars(file_name),
-                                   pack->pack_files[i].filename)) 
+                                   pack->pack_files[i].filename) == 0) 
                         {
                                 FileHandleID fid = pack->file_id;
                                 i32 fpos = pack->pack_files[i].file_pos;
@@ -78,11 +78,14 @@ u8* com_file_find(MString file_name, size_t* file_size)
                                 check_mem(file);
                                 check(sys_file_read(fid, file, flen),
                                       "Failed to read data from file.");
-                                *file_size = flen;
+                                if(file_size) *file_size = (size_t)flen;
+                                debug("%s", pack->pack_files[i].filename);
+                                log_info("File found with size %d", flen);
                                 return file;
                         }
                 }
         }
+        log_info("File not found");
 error:
         if (file) free(file);
         if (file_size) *file_size = 0;
