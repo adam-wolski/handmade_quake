@@ -84,7 +84,7 @@ void sdl_end()
 
 /**
  * TODO Capture keystrokes to SDL_KEY_UP, SDL_KEY_DOWN and SDL_KEY_HELD.
- * Return false on SDL_QUIT.
+ * Returns false on SDL_QUIT.
  **/
 bool sdl_capture_events() 
 {
