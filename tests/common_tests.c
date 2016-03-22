@@ -61,10 +61,27 @@ MU_TEST(test_atoi) {
         mstr_destroy(t5);
 }
 
+MU_TEST(test_x8_to_32) {
+        u8 bytes[4];
+        bytes[0] = 5; /*  0000 0101 */
+        bytes[1] = 10; /* 0000 1010 */
+        bytes[2] = 4; /*  0000 0100 */
+        bytes[3] = 1; /*  0000 0001 */
+        /*0000 0000 0000 0101 0000 1010 0000 0100*/
+        u32 r = com_3x8_to_32(bytes);
+        mu_assert(r == 330244,
+                  "Wrong return value from 3x8_to_32");
+        r = com_4x8_to_32(bytes);
+        /*0000 0101 0000 1010 0000 0100 0000 0001*/
+        mu_assert(r == 84542465,
+                  "Wrong return value from 4x8_to_32");
+}
+
 MU_TEST_SUITE(test_suite) {
         MU_RUN_TEST(test_args);
         MU_RUN_TEST(test_files);
         MU_RUN_TEST(test_atoi);
+        MU_RUN_TEST(test_x8_to_32);
 }
 
 int common_tests()
