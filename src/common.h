@@ -20,3 +20,6 @@ void com_file_clear();
 
 /* Other */
 i32 com_atoi(const MString str);
+u32 com_3x8_to_32(u8* bytes);
+u32 com_4x8_to_32(u8* bytes);
+u32 com_4x8_to_32_inv(u8* bytes);
