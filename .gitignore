@@ -6,3 +6,4 @@ build/*
 .vimrc
 .nvimrc
 */id1/*
+tests/test_content/quakefiles/*
