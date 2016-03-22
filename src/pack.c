@@ -39,8 +39,8 @@ Pack* pack_load(MString path)
 
         for (int i = 0; i < pack_num_files; ++i) {
                 memcpy(pack_files[i].filename, disk_files[i].filename, PACK_DISK_FILENAME_LEN); 
-                pack_files->file_len = disk_files->file_len;
-                pack_files->file_pos = disk_files->file_pos;
+                pack_files[i].file_len = disk_files[i].file_len;
+                pack_files[i].file_pos = disk_files[i].file_pos;
         }
 
         pack = calloc(1, sizeof(Pack));
